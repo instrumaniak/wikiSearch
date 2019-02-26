@@ -14,9 +14,12 @@ class Home extends Component {
     const { navigation } = this.props
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>
-          Search WikiPedia
-        </Text>
+        <View style={styles.textContainer}>
+          <Text style={styles.logoText}>W</Text>
+          <Text style={styles.title}>
+            Search WikiPedia
+          </Text>
+        </View>
         <SearchInput />
         <View>
           <Button
@@ -43,10 +46,17 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     padding: 40
   },
-
+  textContainer: {
+    
+  },
+  logoText: {
+    fontSize: 100,
+    fontFamily: 'serif',
+    alignSelf: 'center'
+  },
   title: {
-    fontSize: 25,
-    //fontWeight: 'bold',
+    fontSize: 20,
+    color: 'silver',
     alignSelf: 'center'
   }
 })
