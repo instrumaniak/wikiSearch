@@ -5,16 +5,27 @@ import {
   StyleSheet
 } from 'react-native'
 
+import PropTypes from 'prop-types'
+
 class SearchInput extends Component {
   render() {
+    const { value, onChangeText } = this.props
+
     return (
       <View style={styles.container}>
         <TextInput
+          value={value}
           placeholder='Type what to search!'
+          onChangeText={onChangeText}
         />
       </View>
     )
   }
+}
+
+SearchInput.propTypes = {
+  value: PropTypes.string,
+  onChangeText: PropTypes.func
 }
 
 const styles = StyleSheet.create({
