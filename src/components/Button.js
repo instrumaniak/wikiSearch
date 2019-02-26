@@ -3,29 +3,37 @@ import {
   TouchableOpacity,
   View,
   Text,
-  StyleSheet 
+  StyleSheet,
+  ActivityIndicator
 } from 'react-native'
 import PropTypes from 'prop-types'
 
-const Button = ({ onPress, title, backgroundColor, color }) => (
+const Button = ({ onPress, title, backgroundColor, color, isLoading, loadingTitle }) => (
   <TouchableOpacity onPress={onPress}>
     <View style={[ styles.container, { backgroundColor }]}>
-      <Text style={[ styles.text, { color }]}>{title}</Text>
+      <Text style={[ styles.text, { color }, { marginRight: isLoading ? 20 : 0 }]}>
+        { isLoading ? loadingTitle : title }
+      </Text>
+      {isLoading && <ActivityIndicator size='small' color='white' /> }
     </View>
   </TouchableOpacity>
 )
 
 Button.propTypes = {
-  title: PropTypes.string,
-  color: PropTypes.string,
-  backgroundColor: PropTypes.string,
-  onPress: PropTypes.func
+  title: PropTypes.string, // Button Text
+  color: PropTypes.string, // Text color
+  backgroundColor: PropTypes.string, 
+  onPress: PropTypes.func,
+  isLoading: PropTypes.bool, // show/hide loading spinner
+  loadingTitle: PropTypes.string
 }
 
 Button.defaultProps = {
   title: '',
   color: 'white',
-  backgroundColor: 'darkgray'
+  backgroundColor: 'darkgray',
+  isLoading: false,
+  loadingTitle: ''
 }
 
 const styles = StyleSheet.create({
@@ -33,10 +41,11 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     margin: 5,
-    alignItems: 'center'
+    flexDirection: 'row',
+    justifyContent: 'center'
   },
   text: {
-    fontSize: 15
+    fontSize: 15,
   }
 })
 

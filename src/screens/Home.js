@@ -3,7 +3,9 @@ import {
   View,
   Text,
   StyleSheet,
-  Keyboard
+  Keyboard,
+  ActivityIndicator,
+  Modal
 } from 'react-native'
 
 import Button from '../components/Button'
@@ -13,7 +15,8 @@ import SearchInput from '../components/SearchInput'
 class Home extends Component {
   state = {
     inputText: '',
-    keyboardShowed: false
+    keyboardShowed: false,
+    isLoading: false
   }
 
   componentDidMount() {
@@ -47,7 +50,7 @@ class Home extends Component {
 
   render() {
     const { navigation } = this.props
-    const { inputText, keyboardShowed } = this.state
+    const { inputText, keyboardShowed, isLoading } = this.state
 
     return (
       <View style={styles.container}>
@@ -63,6 +66,9 @@ class Home extends Component {
         <View>
           <Button
             title='Loader'
+            loadingTitle='Loading...'
+            isLoading={isLoading}
+            onPress={() => this.setState({ isLoading: !isLoading })}
           />
           <Button
             title='Search'
@@ -115,6 +121,13 @@ const styles = StyleSheet.create({
     color: 'silver',
     alignSelf: 'center',
     paddingLeft: 10
+  },
+
+  loaderContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(250,250, 250, 0.5)'
   }
 })
 

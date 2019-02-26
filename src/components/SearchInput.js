@@ -30,7 +30,7 @@ SearchInput.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    //backgroundColor: '#eee',
+    //backgroundColor: 'white',
     borderRadius: 10,
     paddingVertical: 5,
     paddingHorizontal: 20,
