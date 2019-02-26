@@ -18,14 +18,16 @@ const AppNavigator = createStackNavigator({
   Results: {
     screen: Results,
     navigationOptions: {
-      title: 'Results'
+      title: 'Results',
+      gesturesEnabled: true
     }
   },
 
   WikiPage: {
     screen: WikiPage,
     navigationOptions: {
-      title: 'Wiki Page Entry'
+      title: 'Wiki Page Entry',
+      gesturesEnabled: true
     }
   }
 })
