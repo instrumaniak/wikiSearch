@@ -51,7 +51,7 @@ class Home extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.textContainer}>
+        <View style={ keyboardShowed ? styles.textContainer : {} }>
           <Text style={ keyboardShowed ? styles.logoTextSmall : styles.logoText }>
             W
           </Text>
@@ -61,6 +61,9 @@ class Home extends Component {
         </View>
         <SearchInput value={inputText} onChangeText={this._handleInput} />
         <View>
+          <Button
+            title='Loader'
+          />
           <Button
             title='Search'
             backgroundColor='steelblue'
@@ -87,7 +90,8 @@ const styles = StyleSheet.create({
   },
   
   textContainer: {
-    
+    flexDirection: 'row',
+    justifyContent: 'center'
   },
   
   logoText: {
@@ -96,7 +100,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   logoTextSmall: {
-    fontSize: 50,
+    fontSize: 35,
     fontFamily: 'serif',
     alignSelf: 'center'
   },
@@ -109,7 +113,8 @@ const styles = StyleSheet.create({
   titleSmall: {
     fontSize: 15,
     color: 'silver',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    paddingLeft: 10
   }
 })
 
