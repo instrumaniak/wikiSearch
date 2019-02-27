@@ -26,7 +26,7 @@ class Results extends Component {
                 <ResultCard
                   title={item.title}
                   body={item.info}
-                  onPress={() => navigation.navigate('WikiPage')}
+                  onPress={() => navigation.navigate('WikiPage', {url: item.url})}
                 />
               )
             }

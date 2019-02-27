@@ -59,7 +59,7 @@ class Home extends Component {
     // get search results & pass that to Results screen
     getSearchResults(inputText)
       .then(results => {
-        this.setState({ isLoading: false })
+        this.setState({ isLoading: false, inputText: '' })
         
         navigation.navigate('Results', { inputText, results })
       })
@@ -89,11 +89,11 @@ class Home extends Component {
             isLoading={isLoading}
             onPress={this._handleSearch}
           />
-          <Button
+          {/*<Button
             title='Clear'
             backgroundColor='palevioletred'
             onPress={() => this.setState({ inputText: '' })}
-          />
+          />*/}
         </View>
       </View>
     )
