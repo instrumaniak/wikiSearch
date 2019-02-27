@@ -17,6 +17,7 @@ class SearchInput extends Component {
           value={value}
           placeholder='Type what to search!'
           onChangeText={onChangeText}
+          style={styles.input}
         />
       </View>
     )
@@ -36,6 +37,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderColor: '#ccc',
     borderWidth: 1
+  },
+
+  input: {
+    fontSize: 20
   }
 })
 

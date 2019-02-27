@@ -8,6 +8,8 @@ import {
   Modal
 } from 'react-native'
 
+import { getSearchResults } from '../services'
+
 import Button from '../components/Button'
 import SearchInput from '../components/SearchInput'
 
@@ -48,6 +50,21 @@ class Home extends Component {
     this.setState({ keyboardShowed: false })
   }
 
+  _handleSearch = () => {
+    const { inputText } = this.state
+    const { navigation } = this.props
+
+    this.setState({ isLoading: true })
+
+    // get search results & pass that to Results screen
+    getSearchResults(inputText)
+      .then(results => {
+        this.setState({ isLoading: false })
+        
+        navigation.navigate('Results', { inputText, results })
+      })
+  }
+
   render() {
     const { navigation } = this.props
     const { inputText, keyboardShowed, isLoading } = this.state
@@ -65,16 +82,12 @@ class Home extends Component {
         <SearchInput value={inputText} onChangeText={this._handleInput} />
         <View>
           <Button
-            title='Loader'
-            loadingTitle='Loading...'
-            isLoading={isLoading}
-            onPress={() => this.setState({ isLoading: !isLoading })}
-          />
-          <Button
             title='Search'
             backgroundColor='steelblue'
             color='white'
-            onPress={() => navigation.navigate('Results')}
+            loadingTitle='Searching...'
+            isLoading={isLoading}
+            onPress={this._handleSearch}
           />
           <Button
             title='Clear'

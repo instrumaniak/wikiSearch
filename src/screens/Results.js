@@ -12,54 +12,28 @@ import ResultCard from '../components/ResultCard'
 class Results extends Component {
   render() {
     const { navigation } = this.props
+    const results = navigation.getParam('results', [])
+    const inputText = navigation.getParam('inputText', '')
+
     return (
       <View style={styles.container}>
-        <FlatList
-          data={[
-            {
-              title: 'Title',
-              body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eu elit rhoncus lectus pharetra scelerisque ac nec metus. Suspendisse sodales, dui in finibus scelerisque, magna turpis lacinia risus, at sollicitudin enim massa a est. Fusce sed orci in felis euismod dapibus. Phasellus id feugiat nisi. '
-            },
-            {
-              title: 'Title',
-              body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eu elit rhoncus lectus pharetra scelerisque ac nec metus. Suspendisse sodales, dui in finibus scelerisque, magna turpis lacinia risus, at sollicitudin enim massa a est. Fusce sed orci in felis euismod dapibus. Phasellus id feugiat nisi. '
-            },
-            {
-              title: 'Title',
-              body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eu elit rhoncus lectus pharetra scelerisque ac nec metus. Suspendisse sodales, dui in finibus scelerisque, magna turpis lacinia risus, at sollicitudin enim massa a est. Fusce sed orci in felis euismod dapibus. Phasellus id feugiat nisi. '
-            },
-            {
-              title: 'Title',
-              body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eu elit rhoncus lectus pharetra scelerisque ac nec metus. Suspendisse sodales, dui in finibus scelerisque, magna turpis lacinia risus, at sollicitudin enim massa a est. Fusce sed orci in felis euismod dapibus. Phasellus id feugiat nisi. '
-            },
-            {
-              title: 'Title',
-              body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eu elit rhoncus lectus pharetra scelerisque ac nec metus. Suspendisse sodales, dui in finibus scelerisque, magna turpis lacinia risus, at sollicitudin enim massa a est. Fusce sed orci in felis euismod dapibus. Phasellus id feugiat nisi. '
-            },
-            {
-              title: 'Title',
-              body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eu elit rhoncus lectus pharetra scelerisque ac nec metus. Suspendisse sodales, dui in finibus scelerisque, magna turpis lacinia risus, at sollicitudin enim massa a est. Fusce sed orci in felis euismod dapibus. Phasellus id feugiat nisi. '
-            },
-            {
-              title: 'Title',
-              body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eu elit rhoncus lectus pharetra scelerisque ac nec metus. Suspendisse sodales, dui in finibus scelerisque, magna turpis lacinia risus, at sollicitudin enim massa a est. Fusce sed orci in felis euismod dapibus. Phasellus id feugiat nisi. '
-            },
-            {
-              title: 'Title',
-              body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eu elit rhoncus lectus pharetra scelerisque ac nec metus. Suspendisse sodales, dui in finibus scelerisque, magna turpis lacinia risus, at sollicitudin enim massa a est. Fusce sed orci in felis euismod dapibus. Phasellus id feugiat nisi. '
+      { results && results.length > 0 ? 
+          <FlatList
+            data={ results }
+            keyExtractor={ (item, index) => `${index}` }
+            renderItem={
+              ({ item }) => (
+                <ResultCard
+                  title={item.title}
+                  body={item.info}
+                  onPress={() => navigation.navigate('WikiPage')}
+                />
+              )
             }
-          ]}
-          keyExtractor={ (item, index) => `${index}` }
-          renderItem={
-            ({ item }) => (
-              <ResultCard
-                title={item.title}
-                body={item.body}
-                onPress={() => navigation.navigate('WikiPage')}
-              />
-            )
-          }
-        />
+          /> :
+
+          <Text>Data not loaded</Text>
+      }
       </View>
     )
   }

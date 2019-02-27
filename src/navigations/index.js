@@ -17,10 +17,10 @@ const AppNavigator = createStackNavigator({
 
   Results: {
     screen: Results,
-    navigationOptions: {
-      title: 'Results',
+    navigationOptions: ({ navigation }) => ({
+      title: `Results for: ${navigation.getParam('inputText', '')}`,
       gesturesEnabled: true
-    }
+    })
   },
 
   WikiPage: {
