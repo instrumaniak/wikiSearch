@@ -7,17 +7,19 @@ import {
 
 import PropTypes from 'prop-types'
 
+import { colors } from '../config'
+
 class SearchInput extends Component {
   render() {
-    const { value, onChangeText } = this.props
+    const { value, onChangeText, isError } = this.props
 
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, isError ? {borderColor: colors.red } : {}]}>
         <TextInput
           value={value}
           placeholder='Type what to search!'
           onChangeText={onChangeText}
-          style={styles.input}
+          style={ styles.input }
         />
       </View>
     )
@@ -26,7 +28,8 @@ class SearchInput extends Component {
 
 SearchInput.propTypes = {
   value: PropTypes.string,
-  onChangeText: PropTypes.func
+  onChangeText: PropTypes.func,
+  isError: PropTypes.bool
 }
 
 const styles = StyleSheet.create({

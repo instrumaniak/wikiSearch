@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 
 import { getSearchResults } from '../services'
-
+import { colors } from '../config'
 import Button from '../components/Button'
 import SearchInput from '../components/SearchInput'
 
@@ -18,7 +18,8 @@ class Home extends Component {
   state = {
     inputText: '',
     keyboardShowed: false,
-    isLoading: false
+    isLoading: false,
+    isError: false
   }
 
   componentDidMount() {
@@ -39,7 +40,7 @@ class Home extends Component {
   }
 
   _handleInput = (inputText) => {
-    this.setState({ inputText })
+    this.setState({ inputText, isError: false })
   }
 
   _keyboardDidShow = () => {
@@ -54,20 +55,26 @@ class Home extends Component {
     const { inputText } = this.state
     const { navigation } = this.props
 
-    this.setState({ isLoading: true })
+    if(inputText.trim()) {
+      this.setState({ isLoading: true })
 
-    // get search results & pass that to Results screen
-    getSearchResults(inputText)
-      .then(results => {
-        this.setState({ isLoading: false, inputText: '' })
-        
-        navigation.navigate('Results', { inputText, results })
-      })
+      // get search results & pass that to Results screen
+      getSearchResults(inputText)
+        .then(results => {
+          this.setState({ isLoading: false, inputText: '' })
+          
+          navigation.navigate('Results', { inputText, results })
+        })
+    }
+    else {
+      this.setState({ isError: true, inputText: '' })
+    }
+
   }
 
   render() {
     const { navigation } = this.props
-    const { inputText, keyboardShowed, isLoading } = this.state
+    const { inputText, keyboardShowed, isLoading, isError } = this.state
 
     return (
       <View style={styles.container}>
@@ -79,7 +86,10 @@ class Home extends Component {
             Search WikiPedia
           </Text>
         </View>
-        <SearchInput value={inputText} onChangeText={this._handleInput} />
+        <View>
+          <SearchInput value={inputText} onChangeText={this._handleInput} isError={isError} />
+          { isError && <Text style={styles.errorText}>Error: Input cannot be empty!</Text>}
+        </View>
         <View>
           <Button
             title='Search'
@@ -141,6 +151,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'rgba(250,250, 250, 0.5)'
+  },
+
+  errorText: {
+    alignSelf: 'center',
+    paddingTop: 5,
+    color: colors.red
   }
 })
 
