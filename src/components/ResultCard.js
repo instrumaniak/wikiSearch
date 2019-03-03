@@ -8,13 +8,16 @@ import {
 
 import PropTypes from 'prop-types'
 
+const RIGHT_ARROW = '\u2192' // unicode for right arrow
+
 class ResultCard extends Component {
   render() {
-    const { title, body, onPress } = this.props
+    const { title, body, url, onPress } = this.props
     return (
       <TouchableOpacity onPress={onPress}>
         <View style={styles.container}>
-          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.title}>{title} {RIGHT_ARROW}</Text>
+          <Text style={styles.url}>{url}</Text>
           <Text style={styles.body}>{body}</Text>
         </View>
       </TouchableOpacity>
@@ -43,7 +46,12 @@ const styles = StyleSheet.create({
   },
 
   body: {
+    color: '#666'
+  },
 
+  url: {
+    marginBottom: 10,
+    color: 'steelblue'
   }
 })
 

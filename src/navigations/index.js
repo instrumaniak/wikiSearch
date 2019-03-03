@@ -25,12 +25,13 @@ const AppNavigator = createStackNavigator({
 
   WikiPage: {
     screen: WikiPage,
-    navigationOptions: {
-      title: 'Wiki Page Entry',
+    navigationOptions: ({ navigation }) => ({
+      title: `"${navigation.getParam('inputText', '')}" on WikiPedia`,
       gesturesEnabled: true
-    }
+    })
   }
 })
+
 
 const AppContainer = createAppContainer(AppNavigator)
 
