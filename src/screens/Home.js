@@ -5,13 +5,20 @@ import {
   StyleSheet,
   Keyboard,
   ActivityIndicator,
-  Modal
+  Modal,
+  NativeModules,
+  LayoutAnimation
 } from 'react-native'
 
 import { getSearchResults } from '../services'
 import { colors } from '../config'
 import Button from '../components/Button'
 import SearchInput from '../components/SearchInput'
+
+const { UIManager } = NativeModules
+
+UIManager.setLayoutAnimationEnabledExperimental &&
+  UIManager.setLayoutAnimationEnabledExperimental(true)
 
 
 class Home extends Component {
@@ -44,10 +51,12 @@ class Home extends Component {
   }
 
   _keyboardDidShow = () => {
+    LayoutAnimation.spring()
     this.setState({ keyboardShowed: true })
   }
 
   _keyboardDidHide = () => {
+    LayoutAnimation.spring()
     this.setState({ keyboardShowed: false })
   }
 
