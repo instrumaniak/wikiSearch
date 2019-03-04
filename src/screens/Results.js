@@ -27,7 +27,7 @@ class Results extends Component {
                   title={item.title}
                   body={item.info}
                   url={item.url}
-                  onPress={() => navigation.navigate('WikiPage', { url: item.url, inputText })}
+                  onPress={() => navigation.navigate('WikiPage', { url: item.url, title: item.title })}
                 />
               )
             }
